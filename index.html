@@ -1,0 +1,43 @@
+<canvas id="life" width="500" height="500"></canvas>
+<script>
+  canvasContext = document.getElementById("life").getContext("2d")
+  allParticles = []
+
+  draw = (x, y, c, s) => {
+    canvasContext.fillStyle = c
+    canvasContext.fillRect(x, y, s, s)
+  }
+
+  createParticle = (x, y, c) => {
+    return { "x": x, "y": y, "vx": 0, "vy": 0, "color": c }
+  }
+
+  generateRandomCoordinate = () => {
+    return Math.random() * 400 + 50
+  }
+
+  createParticles = (numberOfParticles, color) => {
+    particleGroup = []
+    for (let i = 0; i < numberOfParticles; i++) {
+      let newParticle = createParticle(generateRandomCoordinate(), generateRandomCoordinate(), color);
+      particleGroup.push(newParticle);
+      allParticles.push(newParticle);
+    }
+    return particleGroup;
+  }
+
+  createYellow = createParticles(200, "yellow")
+
+  update = () => {
+    canvasContext.clearRect(0, 0, canvasContext.canvas.width, canvasContext.canvas.height)
+    draw(0, 0, "black", canvasContext.canvas.width, canvasContext.canvas.height)
+    for (let i = 0; i < allParticles.length; i++) {
+      draw(allParticles[i].x, allParticles[i].y,
+        allParticles[i].color, 5)
+    }
+    requestAnimationFrame(update)
+  }
+
+  update()
+
+</script>
