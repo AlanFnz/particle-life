@@ -1,43 +1,42 @@
 <canvas id="life" width="500" height="500"></canvas>
 <script>
-  canvasContext = document.getElementById("life").getContext("2d")
-  allParticles = []
+  const canvasContext = document.getElementById("life").getContext("2d");
+  const backgroundColor = 'black';
+  let allParticles = [];
 
-  draw = (x, y, c, s) => {
-    canvasContext.fillStyle = c
-    canvasContext.fillRect(x, y, s, s)
-  }
+  const draw = (x, y, color, size) => {
+    canvasContext.fillStyle = color;
+    canvasContext.fillRect(x, y, size, size);
+  };
 
-  createParticle = (x, y, c) => {
-    return { "x": x, "y": y, "vx": 0, "vy": 0, "color": c }
-  }
+  const createParticle = (x, y, color) => {
+    return { "x": x, "y": y, "vx": 0, "vy": 0, "color": color };
+  };
 
-  generateRandomCoordinate = () => {
-    return Math.random() * 400 + 50
-  }
+  const generateRandomCoordinate = () => {
+    return Math.random() * 400 + 50;
+  };
 
-  createParticles = (numberOfParticles, color) => {
-    particleGroup = []
+  const createParticles = (numberOfParticles, color) => {
+    let particleGroup = [];
     for (let i = 0; i < numberOfParticles; i++) {
       let newParticle = createParticle(generateRandomCoordinate(), generateRandomCoordinate(), color);
       particleGroup.push(newParticle);
       allParticles.push(newParticle);
     }
     return particleGroup;
-  }
+  };
 
-  createYellow = createParticles(200, "yellow")
-
-  update = () => {
-    canvasContext.clearRect(0, 0, canvasContext.canvas.width, canvasContext.canvas.height)
-    draw(0, 0, "black", canvasContext.canvas.width, canvasContext.canvas.height)
+  const update = () => {
+    canvasContext.clearRect(0, 0, canvasContext.canvas.width, canvasContext.canvas.height);
+    draw(0, 0, backgroundColor, canvasContext.canvas.width, canvasContext.canvas.height);
     for (let i = 0; i < allParticles.length; i++) {
-      draw(allParticles[i].x, allParticles[i].y,
-        allParticles[i].color, 5)
+      draw(allParticles[i].x, allParticles[i].y, allParticles[i].color, 5);
     }
-    requestAnimationFrame(update)
-  }
+    requestAnimationFrame(update);
+  };
 
-  update()
-
+  // init particles and start 
+  createParticles(200, "yellow");
+  update();
 </script>
