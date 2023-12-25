@@ -63,9 +63,13 @@
 
   const update = () => {
     // some rules
-    updateRule(redParticles, redParticles, -0.1)
-    updateRule(redParticles, yellowParticles, -0.01)
-    updateRule(yellowParticles, redParticles, 0.01)
+    updateRule(greenParticles, greenParticles, -0.32)
+    updateRule(greenParticles, redParticles, -0.17)
+    updateRule(greenParticles, yellowParticles, 0.34)
+    updateRule(redParticles, redParticles, -0.10)
+    updateRule(redParticles, greenParticles, -0.34)
+    updateRule(yellowParticles, yellowParticles, 0.15)
+    updateRule(yellowParticles, greenParticles, -0.20)
 
     // drawing
     canvasContext.clearRect(0, 0, canvasContext.canvas.width, canvasContext.canvas.height);
@@ -79,5 +83,6 @@
   // init particles and start 
   const yellowParticles = createParticles(200, "yellow");
   const redParticles = createParticles(200, "red");
+  const greenParticles = createParticles(200, "green");
   update();
 </script>
